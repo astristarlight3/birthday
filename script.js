@@ -6,6 +6,7 @@ const messageButton = document.getElementById("messageButton");
 const hiddenMessage = document.getElementById("hiddenMessage");
 
 const petalsContainer = document.getElementById("petals");
+const birthdayMusic = document.getElementById("birthdayMusic");
 
 
 // =====================================
@@ -13,6 +14,13 @@ const petalsContainer = document.getElementById("petals");
 // =====================================
 
 startButton.addEventListener("click", function () {
+
+    // Start the birthday music
+    if (birthdayMusic) {
+        birthdayMusic.play().catch(function (error) {
+            console.log("Music could not start:", error);
+        });
+    }
 
     // Create the flower petal explosion
     createPetalExplosion();
