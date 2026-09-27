@@ -1,0 +1,923 @@
+/* ============================= */
+/* BASIC RESET */
+/* ============================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #fff5fa;
+    color: #5c3b4d;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+button {
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* ============================= */
+/* MAIN PAGE */
+/* ============================= */
+
+.birthday-page {
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* ============================= */
+/* OPENING SCREEN */
+/* ============================= */
+
+.opening-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    height: 100svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    z-index: 20;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 190, 220, 0.5),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(245, 180, 215, 0.45),
+            transparent 30%
+        ),
+        #fff5fa;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        visibility 0.8s ease;
+}
+
+
+/* Opening screen disappears */
+
+.opening-screen.open {
+    opacity: 0;
+    transform: scale(1.08);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* ============================= */
+/* OPENING CONTENT */
+/* ============================= */
+
+.opening-content {
+    width: 100%;
+    max-width: 420px;
+
+    text-align: center;
+
+    position: relative;
+    z-index: 25;
+}
+
+.small-text {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #a6788f;
+
+    margin-bottom: 18px;
+}
+
+.heart {
+    font-size: 75px;
+    color: #d878a1;
+    line-height: 1;
+
+    margin-bottom: 20px;
+
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+h1 {
+    font-size: clamp(38px, 10vw, 58px);
+    line-height: 1.05;
+
+    color: #70445a;
+
+    margin-bottom: 18px;
+}
+
+.birthday-subtitle {
+    font-size: 17px;
+    line-height: 1.6;
+
+    color: #8f687b;
+
+    max-width: 320px;
+
+    margin: 0 auto 30px;
+}
+
+
+/* ============================= */
+/* BUTTON */
+/* ============================= */
+
+button {
+    background: #d878a1;
+    color: white;
+
+    min-height: 52px;
+
+    padding: 14px 28px;
+
+    border-radius: 999px;
+
+    font-size: 16px;
+
+    box-shadow:
+        0 8px 20px rgba(216, 120, 161, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button:hover {
+    background: #c96591;
+
+    box-shadow:
+        0 10px 25px rgba(216, 120, 161, 0.35);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+
+/* ============================= */
+/* BIRTHDAY CONTENT */
+/* ============================= */
+
+.birthday-content {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    height: 100svh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 5;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 255, 255, 0.9),
+            rgba(255, 245, 250, 0.98)
+        ),
+        #fff5fa;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+.birthday-content.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ============================= */
+/* PHOTO CONTAINERS */
+/* ============================= */
+
+.photo {
+    position: absolute;
+
+    width: clamp(105px, 11vw, 150px);
+
+    z-index: 4;
+
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.photo:hover {
+    transform: scale(1.06) rotate(0deg);
+    z-index: 8;
+}
+
+
+/* ============================= */
+/* PHOTO FRAMES */
+/* ============================= */
+
+.photo-frame {
+    position: relative;
+
+    background: #ffffff;
+
+    padding: 7px 7px 13px;
+
+    border-radius: 8px;
+
+    border: 1px solid #efd5e2;
+
+    box-shadow:
+        0 7px 18px rgba(112, 68, 90, 0.16);
+
+    overflow: visible;
+}
+
+
+/* Decorative inner border */
+
+.photo-frame::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border: 1px solid rgba(216, 120, 161, 0.25);
+
+    border-radius: 10px;
+
+    pointer-events: none;
+}
+
+
+/* Landscape photos */
+
+.photo-frame img {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+}
+
+
+/* ============================= */
+/* FLOWERS ON PHOTO FRAMES */
+/* ============================= */
+
+.flower {
+    position: absolute;
+
+    right: -10px;
+    bottom: -10px;
+
+    font-size: 21px;
+
+    filter:
+        drop-shadow(
+            0 2px 3px rgba(112, 68, 90, 0.15)
+        );
+
+    transform: rotate(12deg);
+
+    z-index: 3;
+}
+
+
+/* ============================= */
+/* LEFT SIDE */
+/* 5 PHOTOS */
+/* ============================= */
+
+.photo-1 {
+    left: 2%;
+    top: 12%;
+
+    transform: rotate(-6deg);
+}
+
+.photo-2 {
+    left: 1%;
+    top: 29%;
+
+    transform: rotate(5deg);
+}
+
+.photo-3 {
+    left: 2%;
+    top: 46%;
+
+    transform: rotate(-4deg);
+}
+
+.photo-4 {
+    left: 1%;
+    top: 63%;
+
+    transform: rotate(6deg);
+}
+
+.photo-5 {
+    left: 2%;
+    top: 80%;
+
+    transform: rotate(-5deg);
+}
+
+
+/* ============================= */
+/* RIGHT SIDE */
+/* 5 PHOTOS */
+/* ============================= */
+
+.photo-6 {
+    right: 2%;
+    top: 12%;
+
+    transform: rotate(6deg);
+}
+
+.photo-7 {
+    right: 1%;
+    top: 29%;
+
+    transform: rotate(-5deg);
+}
+
+.photo-8 {
+    right: 2%;
+    top: 46%;
+
+    transform: rotate(4deg);
+}
+
+.photo-9 {
+    right: 1%;
+    top: 63%;
+
+    transform: rotate(-6deg);
+}
+
+.photo-10 {
+    right: 2%;
+    top: 80%;
+
+    transform: rotate(5deg);
+}
+
+
+/* ============================= */
+/* TOP TWO PHOTOS */
+/* ============================= */
+
+.photo-11 {
+    left: 25%;
+    top: 1%;
+
+    transform: rotate(-5deg);
+}
+
+.photo-12 {
+    right: 25%;
+    top: 1%;
+
+    transform: rotate(5deg);
+}
+
+
+/* ============================= */
+/* BOTTOM TWO PHOTOS */
+/* ============================= */
+
+.photo-13 {
+    left: 25%;
+    bottom: 1%;
+
+    transform: rotate(5deg);
+}
+
+.photo-14 {
+    right: 25%;
+    bottom: 1%;
+
+    transform: rotate(-5deg);
+}
+
+
+/* ============================= */
+/* CENTER BIRTHDAY CARD */
+/* ============================= */
+
+.content-card {
+    width: 100%;
+    max-width: 430px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    border: 1px solid #f0d5e2;
+
+    border-radius: 28px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 40px rgba(112, 68, 90, 0.15);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    position: relative;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    transform:
+        scale(0.92)
+        translateY(15px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+/* Card appears after opening */
+
+.birthday-content.show .content-card {
+    opacity: 1;
+
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+.content-card h2 {
+    font-size: 30px;
+    line-height: 1.2;
+
+    color: #70445a;
+
+    margin-bottom: 18px;
+}
+
+.intro-text {
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: #8f687b;
+
+    margin-bottom: 25px;
+}
+
+
+/* ============================= */
+/* HIDDEN MESSAGE */
+/* ============================= */
+
+.hidden-message {
+    display: none;
+
+    margin-top: 25px;
+    padding-top: 25px;
+
+    border-top: 1px solid #efd5e1;
+}
+
+.hidden-message.show {
+    display: block;
+
+    animation: fadeIn 0.8s ease;
+}
+
+.hidden-message p {
+    font-size: 16px;
+    line-height: 1.8;
+
+    margin-bottom: 15px;
+}
+
+
+/* ============================= */
+/* PETAL EXPLOSION */
+/* ============================= */
+
+.petals {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 30;
+}
+
+.petal {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 13px;
+    height: 19px;
+
+    border-radius: 100% 0 100% 0;
+
+    background: #f7a8c4;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.4);
+
+    animation:
+        petalExplosion 1.7s ease-out forwards;
+}
+
+
+/* Different petal shades */
+
+.petal:nth-child(3n) {
+    background: #f6c1d7;
+}
+
+.petal:nth-child(4n) {
+    background: #f48fb1;
+}
+
+.petal:nth-child(5n) {
+    background: #fff0f5;
+}
+
+
+/* Petal explosion */
+
+@keyframes petalExplosion {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg)
+            scale(0.4);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            rotate(var(--rotation))
+            scale(1);
+    }
+}
+
+
+/* ============================= */
+/* ANIMATIONS */
+/* ============================= */
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ============================= */
+/* MOBILE PHONE */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    .birthday-page {
+        height: 100svh;
+    }
+
+    .opening-screen {
+        padding: 25px 18px;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .heart {
+        font-size: 65px;
+    }
+
+    .birthday-subtitle {
+        font-size: 16px;
+    }
+
+
+    /* ========================= */
+    /* MOBILE PHOTO SIZE */
+    /* ========================= */
+
+    .photo {
+        width: 20vw;
+
+        max-width: 95px;
+        min-width: 65px;
+    }
+
+    .photo-frame {
+        padding: 4px 4px 8px;
+
+        border-radius: 6px;
+    }
+
+    .photo-frame img {
+        aspect-ratio: 4 / 3;
+
+        border-radius: 4px;
+    }
+
+    .flower {
+        font-size: 15px;
+
+        right: -7px;
+        bottom: -7px;
+    }
+
+
+    /* ========================= */
+    /* MOBILE LEFT */
+    /* ========================= */
+
+    .photo-1 {
+        left: 0.5%;
+        top: 14%;
+    }
+
+    .photo-2 {
+        left: 0%;
+        top: 31%;
+    }
+
+    .photo-3 {
+        left: 0.5%;
+        top: 48%;
+    }
+
+    .photo-4 {
+        left: 0%;
+        top: 65%;
+    }
+
+    .photo-5 {
+        left: 0.5%;
+        top: 82%;
+    }
+
+
+    /* ========================= */
+    /* MOBILE RIGHT */
+    /* ========================= */
+
+    .photo-6 {
+        right: 0.5%;
+        top: 14%;
+    }
+
+    .photo-7 {
+        right: 0%;
+        top: 31%;
+    }
+
+    .photo-8 {
+        right: 0.5%;
+        top: 48%;
+    }
+
+    .photo-9 {
+        right: 0%;
+        top: 65%;
+    }
+
+    .photo-10 {
+        right: 0.5%;
+        top: 82%;
+    }
+
+
+    /* ========================= */
+    /* MOBILE TOP PHOTOS */
+    /* ========================= */
+
+    .photo-11 {
+        left: 25%;
+        top: 1%;
+    }
+
+    .photo-12 {
+        right: 25%;
+        top: 1%;
+    }
+
+
+    /* ========================= */
+    /* MOBILE BOTTOM PHOTOS */
+    /* ========================= */
+
+    .photo-13 {
+        left: 25%;
+        bottom: 1%;
+    }
+
+    .photo-14 {
+        right: 25%;
+        bottom: 1%;
+    }
+
+
+    /* ========================= */
+    /* MOBILE CENTER CARD */
+    /* ========================= */
+
+    .birthday-content {
+        padding: 15px;
+    }
+
+    .content-card {
+        width: 48%;
+
+        max-width: 330px;
+        min-width: 180px;
+
+        padding: 25px 15px;
+
+        border-radius: 22px;
+    }
+
+    .content-card h2 {
+        font-size: clamp(21px, 6vw, 27px);
+    }
+
+    .content-card .small-text {
+        font-size: 10px;
+
+        letter-spacing: 1px;
+
+        margin-bottom: 12px;
+    }
+
+    .intro-text {
+        font-size: 13px;
+        line-height: 1.5;
+
+        margin-bottom: 18px;
+    }
+
+    .content-card button {
+        font-size: 13px;
+
+        min-height: 44px;
+
+        padding: 10px 14px;
+    }
+
+    .hidden-message {
+        margin-top: 18px;
+        padding-top: 18px;
+    }
+
+    .hidden-message p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+}
+
+
+/* ============================= */
+/* VERY SMALL PHONES */
+/* ============================= */
+
+@media (max-width: 360px) {
+
+    .photo {
+        width: 19vw;
+        min-width: 60px;
+    }
+
+    .content-card {
+        width: 49%;
+
+        min-width: 165px;
+
+        padding: 22px 12px;
+    }
+
+    .content-card h2 {
+        font-size: 20px;
+    }
+
+    .intro-text {
+        font-size: 12px;
+    }
+
+    .content-card button {
+        font-size: 12px;
+
+        padding: 9px 11px;
+    }
+}
+
+
+/* ============================= */
+/* ACCESSIBILITY */
+/* ============================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
